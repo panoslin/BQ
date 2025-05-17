@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Behavioral Interview Prep</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Back to Table Button Styles */
+        #backToTable {
+            display: block;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        #backToTable:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="text-center py-3">
+            <h1>Amazon Leadership Principles - Story Lookup</h1>
+        </header>
+
+        <!-- Self-Introduction Section -->
+        <div class="introduction-section mb-4 p-4 bg-light border rounded">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="mb-3">About Me</h2>
+                    <p>Hi, my name is <strong>Guohui Lin</strong>, but I know it can be a bit tricky to pronounce, so feel free to call me by my preferred name, <strong>Panos</strong>.</p>
+                    
+                    <h4 class="mt-4">Professional Experience</h4>
+                    <p>I have 7 years of development experience in full-stack web development, including 2 years as a Research Assistant in my professor's lab, where I worked on industry collaborations and software projects.</p>
+                    
+                    <h4 class="mt-4">Technical Skills</h4>
+                    <ul>
+                        <li><strong>Programming Languages:</strong> Python (primary), Java, C++</li>
+                        <li><strong>Backend:</strong> Django (REST API), Spring Boot</li>
+                        <li><strong>Frontend:</strong> Angular, TypeScript</li>
+                        <li><strong>Databases:</strong> MySQL, PostgreSQL, MSSQL</li>
+                        <li><strong>Development Tools:</strong> Docker, Git, CI/CD pipelines (Pytest, Jenkins, GitHub Actions)</li>
+                    </ul>
+                    
+                    <h4 class="mt-4">Education</h4>
+                    <p>Currently pursuing a Master's degree in Computer Science in the U.S., with an expected graduation date of May 2025.</p>
+                    
+                    <p class="mt-4 lead">I'm excited to be here today and appreciate the opportunity to interview with you. Looking forward to our conversation!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Five-Year Plan Section -->
+        <div class="career-plan-section mb-4 p-4 bg-light border rounded">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="mb-3">Five-Year Plan: Becoming a Tech Lead</h2>
+                    
+                    <h4 class="mt-4">Short-Term Goals (1-2 Years)</h4>
+                    <p>Right now, I'm focused on expanding my technical expertise and leadership skills to prepare for a tech lead role in the future. To achieve this, I am actively:</p>
+                    <ul>
+                        <li>Transitioning from backend to full-stack development by building web applications using Angular and backend technologies, allowing me to gain a deeper understanding of end-to-end system architecture</li>
+                        <li>Learning multiple programming languages beyond Python, including Java and C++, to understand their trade-offs</li>
+                        <li>Mentoring junior engineers at my lab and friends, helping them with coding, system design, and algorithms, which strengthens my leadership and technical communication skills</li>
+                        <li>Collaborating with past colleagues from the startup to build new products from the ground up, allowing me to gain hands-on experience in architecting scalable solutions</li>
+                    </ul>
+                    
+                    <h4 class="mt-4">Mid-Term Goals (3-5 Years)</h4>
+                    <p>In the next few years, my goal is to transition into a tech lead position where I can take ownership of projects, guide engineering teams, and contribute to technical decision-making at a higher level. To get there, I will:</p>
+                    <ul>
+                        <li>Deepen my expertise in system design and distributed systems to build scalable and high-performance applications</li>
+                        <li>Take on more leadership roles within my team, such as driving technical discussions, making architectural decisions, and improving engineering processes</li>
+                        <li>Continue mentoring and developing junior engineers, fostering a strong engineering culture</li>
+                        <li>Stay updated with emerging technologies and best practices, ensuring that I bring innovative solutions to the team</li>
+                    </ul>
+                    
+                    <h4 class="mt-4">Long-Term Vision</h4>
+                    <p>In the next five years, I see myself as a tech lead or engineering manager, leading a team, shaping technical strategy, and delivering impactful products. My ultimate goal is to build high-performing engineering teams while driving innovation in software development.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions mb-3">
+            <button class="btn btn-primary filter-btn" data-filter="conflict">Show Conflict Stories</button>
+            <button class="btn btn-warning filter-btn" data-filter="failure">Show Failure Stories</button>
+            <button class="btn btn-info filter-btn" data-filter="reset">Show All Stories</button>
+        </div>
+
+        <div class="table-responsive">
+            <table id="storyTable" class="table table-striped table-bordered compact hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Story Title</th>
+                        <th>1-Line Summary</th>
+                        <th>Keywords/Tags</th>
+                        <th>Conflict</th>
+                        <th>Failure</th>
+                        <th>1. Deliver Results</th>
+                        <th>2. Invent and Simplify</th>
+                        <th>3. Customer Obsession</th>
+                        <th>4. Ownership</th>
+                        <th>5. Dive Deep</th>
+                        <th>6. Learn and Be Curious</th>
+                        <th>7. Have Backbone</th>
+                        <th>8. Earn Trust</th>
+                        <th>9. Are Right, A Lot</th>
+                        <th>10. Hire and Develop</th>
+                        <th>11. Highest Standards</th>
+                        <th>12. Think Big</th>
+                        <th>13. Bias for Action</th>
+                        <th>14. Frugality</th>
+                        <th>15. Best Employer</th>
+                        <th>16. Responsibility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="#apologizing-to-someone">Apologizing to Someone</a></td>
+                        <td>Recognized mistake in excluding DevOps engineer from Agile process</td>
+                        <td>Process improvement ownership conflict resolution accountability apology team morale agile methodology DevOps integration sprint tracking workflow improvement collaboration team building inclusivity senior engineers recognition respect diversity professional growth feedback implementation stakeholder management project management leadership failure lesson learned mistake correction one-on-one communication active listening TVCBOOK career development self awareness humility team cohesion process adaptation workplace relationships inclusion empathy</td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><a href="#transcoding-system">Transcoding System</a></td>
+                        <td>Built scalable system using Celery & Docker</td>
+                        <td>Deep tech initiative distributed systems architecture microservices load balancing performance optimization video processing transcoding queue scalability docker containerization celery rabbitmq message broker asynchronous processing parallel computing ffmpeg media conversion automation monitoring alerting fault tolerance resiliency high availability system design infrastructure scaling distributed computing technical leadership backend development DevOps CI/CD pipeline</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><a href="#logging-fix-at-hsbc">Logging Fix at HSBC</a></td>
+                        <td>Reduced log size from 100GB to 1GB with simple solution</td>
+                        <td>Simplicity frugality log management storage optimization system performance debugging enterprise application bank banking finance HSBC log rotation archive analysis resource utilization cost saving python logging handler filter pattern recognition technical solution simplification efficiency improvement system administration operational excellence storage space reduction data management log level filtering technical debt elimination performance bottleneck troubleshooting</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><a href="#mpi-debugging">MPI Debugging</a></td>
+                        <td>Fixed non-deterministic bug in parallel computing</td>
+                        <td>Technical challenge persistence debugging parallel computing MPI traveling salesman problem TSP non-deterministic issue algorithm optimization computer science distributed computing systematic debugging root cause analysis troubleshooting programming language comparison python C++ GIL global interpreter lock asynchronous API race condition concurrent programming problem solving academic project edge case professor collaboration log analysis testing</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><a href="#report-generation-fix">Report Generation Fix</a></td>
+                        <td>Quick-fixed compliance report bug under pressure</td>
+                        <td>Emergency response debugging compliance report bug fix time critical deadline pressure input validation requirements gathering user feedback quick response root cause analysis regression testing software maintenance error handling crisis management decision making prioritization zoom meeting stakeholder communication data format compatibility production issue defect resolution customer focus quality assurance system reliability bug recovery fast turnaround input sanitization</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><a href="#linkedin-job-turbo">LinkedIn Job Turbo</a></td>
+                        <td>Built AI-powered job matching system from scratch</td>
+                        <td>ML AI architecture machine learning artificial intelligence job matching recommendation system LinkedIn web application fullstack development ChatGPT system design cloud deployment AWS Kubernetes containerization model training NLP natural language processing frontend backend database resume parsing job description API integration microservices architecture learning new technology innovation creative solution personal project career development technical skills job search automation job application pipeline</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><a href="#dashboard-ui-enhancement">Dashboard UI</a></td>
+                        <td>Leveraged external trends to improve UI design</td>
+                        <td>UX design research external trends UI component libraries material UI ant design primeNG data visualization workflow improvement user experience interface design component evaluation software selection industry standards professional lab modern technologies requirements analysis user adoption change management web application dashboard frontend Excel migration form handling interactive elements customization tool assessment technical requirements business alignment client satisfaction user-centered design workflow optimization intuitive navigation technology integration</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><a href="#devops-integration">DevOps Integration</a></td>
+                        <td>Fixed Agile scoring to include infrastructure work</td>
+                        <td>Team dynamics process fix DevOps integration Agile sprint methodology scoring system infrastructure work CI/CD deployment automation recognition representation fairness team morale collaboration cross-functional teams metrics evaluation performance measurement agile process improvement development operations developer experience workplace equity appreciation contribution recognition conflict resolution underrepresented work team recognition professional growth workplace relationship process adjustment inclusion DevOps culture fair assessment</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><a href="#career-switch">Career Switch</a></td>
+                        <td>Transitioned from Financial Mathematics to Computer Science</td>
+                        <td>Growth initiative career transition financial mathematics computer science programming software development education self-learning bootcamp coding passion discovery automation python for finance new skills career path determination persistence learning journey continuous improvement networking professional development career growth programming language python fullstack web development personal projects portfolio building job search programming bootcamp interview preparation ambition courage change adaptation learning opportunity startup job problem-solving mindset</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><a href="#unresponsive-api-team">Unresponsive API Team</a></td>
+                        <td>Got API docs through persistence and networking</td>
+                        <td>Communication problem solving API documentation unresponsive team persistence cross-team collaboration networking documentation creation relationship building resourcefulness HSBC SSO single sign-on communication barriers organization silos focused meeting preparation prioritization strategic communication escalation knowledge sharing technical documentation collaboration obstacles difficult coworker challenging interpersonal interactions team player peer relationship team boundary</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><a href="#critical-feedback">Critical Feedback</a></td>
+                        <td>Learned to take ownership beyond direct tasks</td>
+                        <td>Growth leadership feedback improvement criticism acceptance ownership responsibility accountability 1:1 meetings communication style inclusivity leadership development self-improvement relationship building team management growth mindset professional development senior engineers engagement startup culture inclusive environment process adjustment honest communication adaptive leadership failure learning opportunity broadening perspective maturity ownership mindset initiative accepting criticism vulnerability receiving feedback improvement focus</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td><a href="#simple-log-solution">Simple Log Solution</a></td>
+                        <td>Solved storage issue with rotation instead of complexity</td>
+                        <td>Innovation efficiency log management storage optimization system performance python logging rotation archiving simplification resource management space saving cost reduction simple solution elegant design practical approach alternative solution technical analysis pattern recognition enterprise application HSBC bank banking minimalist design technical debt elimination system administration operational excellence storage space reduction data management log level filtering performance improvement operations optimization</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td><a href="#mentoring-web-dev">Mentoring Junior Engineers</a></td>
+                        <td>Mentored junior engineers on web development with structured approach</td>
+                        <td>Mentorship leadership teaching junior developers knowledge sharing skill development structured learning path web development frontend backend database guidance technical direction fullstack progress review check-in meetings team building knowledge transfer professor lab university project management progressive tasks coaching supervision independent problem solving team leadership education training development plan skill growth empowerment delegation teaching methodology professional growth onboarding training curriculum</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td><a href="#sso-security-conflict">SSO Security Conflict</a></td>
+                        <td>Stopped insecure SSO implementation via respectful push</td>
+                        <td>Security conflict SSO single sign-on authentication cybersecurity best practices vulnerability assessment respectful disagreement senior engineer technical leadership security advocacy client web application HSBC OWASP web security authorization authentication protocol standards industry best practices research technical evidence disagreement high stakes security risk sensitive data protection collaborative solution productive conflict security posture principled opposition respectful confrontation security standards information security integrity persuasion stakeholder</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td><a href="#questioning-report-requirements">ALDR Requirements</a></td>
+                        <td>Redirected inefficient project through strategic questions</td>
+                        <td>Client relationship conflict resolution research assistant power station automation workflow report generation cost-benefit analysis resource allocation strategic questioning regulatory compliance risk management project feasibility collaborative problem-solving alternative solution project redirection time savings resource optimization critical thinking leadership compromise negotiation stakeholder engagement regulatory requirements client satisfaction project reprioritization data-driven decision making open-ended questions listening skills effective communication respectful disagreement value proposition</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td><a href="#greatest-weakness">Greatest Weakness</a></td>
+                        <td>Took on too much work without proper delegation</td>
+                        <td>Time management workload balance delegation knowledge sharing prioritization work distribution parallel projects self-sufficiency overwork burnout technical expertise training mentoring inefficiency stress project management multitasking self-awareness personal growth learning from mistakes team collaboration HSBC critical feature optimization improvement professional development leadership skills development strategy failure weakness self-reflection resource allocation task sharing experience sharing team capacity</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td><a href="#difficult-client">Difficult Client</a></td>
+                        <td>Resolved performance complaints by understanding actual needs</td>
+                        <td>Communication client management database performance query optimization latency troubleshooting HSBC banking application customer support technical explanation translation non-technical language client relations client education clarification direct communication problem solving conflict resolution customer satisfaction user guidance proactive support database indexing SQL optimization performance tuning challenging client customer expectations technical communication skills complex concepts simplification misunderstanding resolution customer service relationship building active listening effective explanation banking industry</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td><a href="#prioritizing-customers">Prioritizing Customers</a></td>
+                        <td>Created framework to balance customer needs by impact and urgency</td>
+                        <td>Decision making customer service prioritization framework strategic planning resource allocation HSBC bank transaction system feature requests bug fixes performance issues impact assessment urgency evaluation critical issues backlog management customer communication transparency timeline expectations management workload balance issue categorization customer focus service level agreement task management critical thinking problem triage system stability maintenance long-term improvement customer satisfaction proactive management strategy execution customer relationship management banking industry software service issue resolution</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td><a href="#unclear-responsibility">Unclear Responsibility</a></td>
+                        <td>Took initiative in project with ambiguous role assignments</td>
+                        <td>Cross-functional leadership coordination project management HSBC dashboard client contact information backend frontend DevOps collaboration ambiguity task allocation role definition initiative proactive approach team alignment documentation task list regular check-ins containerization Docker integration system deployment communication structure workflow improvement cross-team coordination task mapping ownership responsibility clarity ambiguous situation facilitation structure sync meeting technical coordination team enablement leadership skills project delivery timely completion team workflow future planning role clarification boundary management aligned execution structure creation no project manager</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td><a href="#incomplete-data-debugging">Incomplete Data Debugging</a></td>
+                        <td>Fixed report generation bug with minimal information</td>
+                        <td>Problem solving debugging compliance reports excel automation error handling edge cases testing validation input validation data analysis collaboration team meeting real-time troubleshooting investigation quick fix system reliability error notification user feedback root cause analysis edge case handling proactive error detection input file format validation production readiness system improvement time pressure debugging techniques log improvement technical solution edge case detection critical thinking analytical skills solution implementation timely delivery missing error messages incomplete information quality assurance</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td><a href="#team-member-failed">Team Member Failed</a></td>
+                        <td>Helped junior engineer solve UI responsiveness issue</td>
+                        <td>Mentorship performance improvement UI responsiveness CSS debugging frontend development team leadership junior engineer technical coaching web development dialog box responsive design browser developer tools LLM GitHub issue code review hands-on guidance teaching CSS grid layout browser compatibility failure handling performance problem troubleshooting user interface HTML JavaScript skill development coaching feedback one-on-one meeting professor lab dashboard web application team communication technical mentoring teaching methodology systematic approach problem solving resource sharing productivity UI issues</td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td><a href="#calculated-risk">Calculated Risk</a></td>
+                        <td>Renewed Agile workflow tool without approval to prevent disruption</td>
+                        <td>Decision making risk assessment Agile workflow subscription renewal budget approval team productivity TVCBOOK initiative project management tool software license expiration finance team reimbursement justification business continuity sprint planning resource management leadership judgment independent decision making urgency risk versus reward assessment critical thinking proactive approach financial responsibility team enablement calculated risk responsible autonomy bottom line impact business operations continuity risk mitigation strategic thinking rapid response</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td><a href="#communicating-change">Communicating Change</a></td>
+                        <td>Convinced team to change backend approach for maintainability</td>
+                        <td>Technical leadership strategic planning backend architecture system design maintainability technical debt conflict resolution HSBC data-driven decision making compromise business impact long-term thinking project management development timeline team alignment convincing stakeholders communication skills technical comparison manager relationship proactive planning technical analysis refactoring complex systems simplified solutions business case presentation strategic thinking engineering leadership service integration system architecture technical negotiation maintenance cost software design architectural planning client information dashboard persuasive communication</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td><a href="#delivering-harsh-truth">Delivering Harsh Truth</a></td>
+                        <td>Addressed junior engineer's incomplete work with direct feedback</td>
+                        <td>Performance management leadership difficult conversation feedback junior engineer frontend development buggy code professor lab dashboard web application team leadership coaching mentoring constructive feedback 1:1 meeting psychological safety professional development skill improvement code quality objective feedback accountability expectation setting structured learning pair programming team dynamics project timeline technical growth honest communication professional growth talent development performance improvement conflict resolution tough love team efficiency debugging skills web development frontend skills solution-oriented approach candid conversation bug prevention professional relationship feedback culture honest feedback</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="checkmark">✅</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="story-details">
+            <div id="apologizing-to-someone" class="story-section">
+                <h3>Apologizing for Overlooking a Senior Engineer's Role in the Agile Workflow</h3>
+                <p><strong>Situation</strong>: At TVCBOOK, I was responsible for building and implementing an Agile development workflow to improve project tracking and efficiency. As part of this process, I onboarded engineers and introduced sprint tracking to measure individual contributions. However, I overlooked involving one of the senior DevOps engineers in the discussion, and as a result, the workflow did not fully reflect his contributions, making him feel undervalued in the new system.</p>
+                <p><strong>Task</strong>: I needed to acknowledge my mistake, apologize for the oversight, and adjust the workflow to fairly represent all team members' contributions, including DevOps work that might not directly tie to sprint stories but was critical to the project's success.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Scheduled a one-on-one conversation with the DevOps engineer</li>
+                    <li>Apologized directly for not properly considering his role</li>
+                    <li>Asked for his feedback on better representing his work in the Agile process</li>
+                    <li>Adjusted the workflow to incorporate DevOps tasks explicitly</li>
+                    <li>Shared the updated workflow with the team to reinforce all roles' importance</li>
+                    <li>Highlighted infrastructure improvements and automation as sprint items</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>DevOps engineer appreciated the apology and effort to fix the oversight</li>
+                    <li>Updated workflow properly acknowledged his contributions</li>
+                    <li>Strengthened collaboration between DevOps and development teams</li>
+                    <li>Improved team morale as everyone's work was fairly represented</li>
+                    <li>Ensured Agile tracking reflected all contributions</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Inclusion in decision-making is just as important as the workflow itself; engage all relevant team members upfront when introducing new processes.</p>
+            </div>
+
+            <div id="transcoding-system" class="story-section">
+                <h3>Transcoding System</h3>
+                <p><strong>Situation</strong>: At TVCBOOK, video processing system was slow and inefficient.</p>
+                <p><strong>Task</strong>: Optimize video processing to reduce delays and improve scalability.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Redesigned as distributed system using Celery, RabbitMQ</li>
+                    <li>Implemented load balancing</li>
+                    <li>Optimized FFMPEG parameters</li>
+                    <li>Containerized with Docker</li>
+                    <li>Added automated monitoring and failure recovery</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>60% reduction in processing time</li>
+                    <li>Improved system scalability</li>
+                    <li>Enhanced reliability with automated recovery</li>
+                    <li>Videos available within 30 seconds</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Going beyond immediate requirements can create significant long-term value.</p>
+            </div>
+
+            <div id="logging-fix-at-hsbc" class="story-section">
+                <h3>Logging Fix at HSBC</h3>
+                <p><strong>Situation</strong>: Logging system consuming 100GB+ storage, causing performance issues.</p>
+                <p><strong>Task</strong>: Reduce storage usage while maintaining essential logs.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Analyzed log patterns and retention needs</li>
+                    <li>Implemented rotating log archive handler</li>
+                    <li>Added log level filtering</li>
+                    <li>Used built-in Python logging handler</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Reduced storage from 100GB to 1GB</li>
+                    <li>Improved system performance</li>
+                    <li>Maintained all essential logs</li>
+                    <li>Implemented in days vs weeks</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Simple solutions often outperform complex ones.</p>
+            </div>
+
+            <div id="mpi-debugging" class="story-section">
+                <h3>MPI Debugging</h3>
+                <p><strong>Situation</strong>: In Parallel Algorithms class, implementing MPI pipeline for Traveling Salesman Problem.</p>
+                <p><strong>Task</strong>: Debug non-deterministic issue causing incorrect results in large test cases.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Systematically debugged using print statements and logging</li>
+                    <li>Explored multiple approaches including LLMs and professor consultation</li>
+                    <li>Rewritten algorithm in C++ to test if Python's GIL was the cause</li>
+                    <li>Analyzed logs for large test cases</li>
+                    <li>Identified asynchronous API call issue causing cascading errors</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Fixed critical bug affecting large computations</li>
+                    <li>Ensured consistent correct results</li>
+                    <li>Improved understanding of distributed systems debugging</li>
+                    <li>Successfully completed the project</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Systematic debugging approach is crucial for complex distributed systems.</p>
+            </div>
+
+            <div id="report-generation-fix" class="story-section">
+                <h3>Report Generation Fix</h3>
+                <p><strong>Situation</strong>: Critical bug in compliance report generation program blocking team's testing.</p>
+                <p><strong>Task</strong>: Identify and fix the issue quickly to unblock team with three-week deadline.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Set up quick Zoom meeting to understand issue firsthand</li>
+                    <li>Collected logs and sample input files</li>
+                    <li>Replicated problem locally</li>
+                    <li>Discovered input format change causing failure</li>
+                    <li>Built and deployed quick fix</li>
+                    <li>Added input validation</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Fixed issue within one day</li>
+                    <li>Unblocked team's testing process</li>
+                    <li>Improved system reliability with validation</li>
+                    <li>Maintained project timeline</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Quick response with proper validation prevents future issues.</p>
+            </div>
+
+            <div id="linkedin-job-turbo" class="story-section">
+                <h3>LinkedIn Job Turbo</h3>
+                <p><strong>Situation</strong>: Needed efficient job search/apply system with AI capabilities.</p>
+                <p><strong>Task</strong>: Build comprehensive job matching system with AI and cloud deployment.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Used ChatGPT to design complete system architecture</li>
+                    <li>Implemented frontend, backend, database components</li>
+                    <li>Integrated AI model for job matching</li>
+                    <li>Deployed using Kubernetes on AWS</li>
+                    <li>Learned ML model training and Kubernetes configuration</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Built full-stack AI-powered system</li>
+                    <li>Gained practical experience in ML and cloud</li>
+                    <li>Successfully deployed production-ready application</li>
+                    <li>Created customizable solution for job search</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Complex systems can be tackled by breaking down into learnable components.</p>
+            </div>
+
+            <div id="dashboard-ui-enhancement" class="story-section">
+                <h3>Leveraging External Trends to Improve UI Design for a Dashboard Webpage</h3>
+                <p><strong>Situation</strong>: While working in my professor's lab, I collaborated with a company to build a dashboard web application that would replace their Excel-based workflow, enabling better collaboration and usability. As part of the development process, I needed to assess and evaluate the system's design, particularly ensuring that the UI was intuitive, modern, and aligned with the company's needs.</p>
+                <p><strong>Task</strong>: My goal was to identify the best UI component library that would efficiently incorporate the company's requirements, provide a great user experience, and allow for easy customization.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Researched and compared trending UI component libraries such as Material UI, Ant Design, and PrimeNG</li>
+                    <li>Evaluated their suitability based on component availability, ease of customization, and performance</li>
+                    <li>Analyzed the company's specific needs for data visualization, form handling, and interactive elements</li>
+                    <li>Selected PrimeNG because it had all the necessary components, was highly customizable, and integrated well with our technology stack</li>
+                    <li>Implemented the UI with a focus on intuitive navigation and workflow optimization</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>The dashboard was well-received by the company, particularly for its intuitive UI and seamless user experience</li>
+                    <li>The manager was very satisfied, as the UI greatly improved workflow efficiency</li>
+                    <li>Employees transitioned easily from Excel to the new system with minimal training</li>
+                    <li>Customization was straightforward, allowing quick adaptation to additional feature requests without significant rework</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Staying updated with industry trends and selecting tools based on both technical and business requirements leads to better user adoption and satisfaction.</p>
+            </div>
+
+            <div id="devops-integration" class="story-section">
+                <h3>DevOps Integration</h3>
+                <p><strong>Situation</strong>: Senior DevOps engineer scoring low in Agile sprints despite high impact.</p>
+                <p><strong>Task</strong>: Adjust Agile workflow to fairly represent infrastructure work.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Analyzed sprint scoring system</li>
+                    <li>Identified gap in infrastructure task representation</li>
+                    <li>Met with DevOps engineer to understand work</li>
+                    <li>Updated workflow to include DevOps tasks</li>
+                    <li>Adjusted sprint metrics for infrastructure work</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Improved team morale</li>
+                    <li>Better recognition of infrastructure work</li>
+                    <li>Enhanced collaboration between Dev and Ops</li>
+                    <li>More accurate sprint tracking</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Process improvements must consider all types of contributions.</p>
+            </div>
+
+            <div id="career-switch" class="story-section">
+                <h3>Career Switch: From Financial Mathematics to Computer Science</h3>
+                <p><strong>Situation</strong>: One of the most difficult situations I faced was changing my career path from Financial Mathematics to Computer Science. During my third year of undergraduate studies, I took a "Python for Finance" course, which introduced me to programming. I was fascinated by how automation could reduce repetitive manual tasks and create efficient solutions. That experience made me realize that I wanted to pursue a career in software development. However, making this shift was extremely challenging because I had no formal computer science background and had to compete with students who had years of programming experience.</p>
+                <p><strong>Task</strong>: My goal was to develop strong technical skills and gain practical experience to make myself competitive in the job market, despite starting from scratch.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Joined a coding bootcamp to learn full-stack development, including backend, frontend, and databases</li>
+                    <li>Built small projects to apply my knowledge, such as a web application for financial calculations</li>
+                    <li>Connected with experienced developers and senior CS students for guidance</li>
+                    <li>Sought mentorship and learned from others' career transitions</li>
+                    <li>Continuously practiced and built my portfolio of projects</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Successfully transitioned from Financial Mathematics to Computer Science</li>
+                    <li>Gained hands-on experience in full-stack development</li>
+                    <li>Developed a strong problem-solving mindset for adapting to new challenges</li>
+                    <li>Secured a software engineer position at a startup despite my non-CS background</li>
+                    <li>Applied my skills to real-world projects, continuing to improve my abilities</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Career transitions are possible with the right mindset, effort, and persistence. Breaking down complex goals into achievable steps and embracing challenges enables continuous improvement, a mindset that helps when facing new technical or professional obstacles.</p>
+            </div>
+
+            <div id="unresponsive-api-team" class="story-section">
+                <h3>Unresponsive API Team</h3>
+                <p><strong>Situation</strong>: At HSBC, needed SSO API documentation but responsible engineer unresponsive.</p>
+                <p><strong>Task</strong>: Obtain necessary API details without causing project delays.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Tried multiple communication channels</li>
+                    <li>Searched existing documentation</li>
+                    <li>Connected with other team members</li>
+                    <li>Scheduled focused 10-minute meeting</li>
+                    <li>Prepared specific questions beforehand</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Got required API details within a week</li>
+                    <li>Unblocked development progress</li>
+                    <li>Created documentation for future reference</li>
+                    <li>Improved cross-team collaboration</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Persistence and structured communication overcome collaboration barriers.</p>
+            </div>
+
+            <div id="critical-feedback" class="story-section">
+                <h3>Critical Feedback</h3>
+                <p><strong>Situation</strong>: At startup, received feedback about focusing only on junior engineers.</p>
+                <p><strong>Task</strong>: Address feedback and improve leadership approach.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Acknowledged the feedback</li>
+                    <li>Started regular 1:1s with senior engineers</li>
+                    <li>Adjusted communication style</li>
+                    <li>Made process changes based on input</li>
+                    <li>Created more inclusive environment</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Better team alignment</li>
+                    <li>Improved senior engineer engagement</li>
+                    <li>More effective Agile process</li>
+                    <li>Stronger leadership skills</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Effective leadership requires engaging all experience levels.</p>
+            </div>
+
+            <div id="simple-log-solution" class="story-section">
+                <h3>Simple Log Solution</h3>
+                <p><strong>Situation</strong>: At HSBC, our logging system was consuming a substantial amount of storage—over 100GB of log files. This was causing performance issues and making it difficult to retrieve relevant logs when debugging. Some team members suggested complex solutions, like implementing a distributed logging system or offloading logs to external storage, but these approaches required significant infrastructure changes and development effort.</p>
+                <p><strong>Task</strong>: My goal was to reduce log storage usage while ensuring that essential logs remained accessible, without overcomplicating the system.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>After observation, found that most logs were unnecessary old records</li>
+                    <li>Developed a custom rotating log archive handler for automatic compression and deletion</li>
+                    <li>Introduced log level filtering to prioritize error and warning logs</li>
+                    <li>Used built-in Python logging handler instead of new dependencies</li>
+                    <li>Avoided complex external solutions that would disrupt workflows</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Reduced log storage from ~100GB to just ~1GB</li>
+                    <li>Significantly improved system performance</li>
+                    <li>Made debugging faster and more efficient</li>
+                    <li>Implemented solution in days instead of weeks</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Complex problems don't always require complex solutions. By understanding the root cause and leveraging existing tools, I created a simple, effective, and maintainable solution. I now prioritize efficiency and scalability before considering more complex alternatives.</p>
+            </div>
+
+            <div id="mentoring-web-dev" class="story-section">
+                <h3>Mentoring Junior Engineers on Web Development</h3>
+                <p><strong>Situation</strong>: While leading a team of five in my professor's lab to develop a dashboard web application, two of the engineers had zero prior experience in web development. Since the project required full-stack development, they needed to quickly learn the database, backend, and frontend technologies to contribute effectively.</p>
+                <p><strong>Task</strong>: My goal was to mentor them step by step, ensuring they gained the necessary technical skills while actively contributing to the project.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Provided a project overview, explaining how the database, backend, and frontend interact to give them a big-picture understanding</li>
+                    <li>Designed a structured learning path with progressive tasks—starting with database queries, then backend API development, and finally frontend components</li>
+                    <li>Held weekly check-in meetings to review progress, discuss challenges, and provide guidance</li>
+                    <li>Encouraged independent problem-solving while being available for questions</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>After completing the full cycle, both engineers were able to develop web applications from scratch independently</li>
+                    <li>They actively contributed to new features without needing constant supervision</li>
+                    <li>The manager and professor were happy with their progress and the team's efficiency</li>
+                    <li>Project completed on schedule with high-quality contributions from all team members</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: By structuring the learning process, providing hands-on practice, and maintaining regular check-ins, mentoring can be both effective and rewarding, helping junior engineers ramp up quickly and contribute meaningfully.</p>
+            </div>
+
+            <div id="sso-security-conflict" class="story-section">
+                <h3>SSO Security Conflict</h3>
+                <p><strong>Situation</strong>: At HSBC, working on a client web application that required Single Sign-On (SSO) integration. A senior engineer proposed implementing SSO using an approach that had potential security vulnerabilities.</p>
+                <p><strong>Task</strong>: Address the security concerns while maintaining good working relationships and ensuring a secure implementation.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Researched industry best practices for secure SSO implementation</li>
+                    <li>Identified specific vulnerabilities in the proposed approach</li>
+                    <li>Prepared data demonstrating potential security risks</li>
+                    <li>Approached the senior engineer privately with my concerns</li>
+                    <li>Presented alternative implementation options with security benefits</li>
+                    <li>Used respectful, fact-based language focused on project outcomes</li>
+                    <li>Collaborated on developing a more secure approach</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Prevented a potentially serious security vulnerability</li>
+                    <li>The team adopted a more secure SSO implementation</li>
+                    <li>Maintained positive working relationship with the senior engineer</li>
+                    <li>Established myself as someone who prioritizes security</li>
+                    <li>Project succeeded with robust authentication</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Technical disagreements can be navigated successfully by focusing on facts, showing respect, and maintaining focus on shared goals like security.</p>
+            </div>
+
+            <div id="questioning-report-requirements" class="story-section">
+                <h3>Questioning Report Requirements</h3>
+                <p><strong>Situation</strong>: As a Research Assistant leading a team of 5 in my professor's lab, we collaborated with a Texas-based power station company to automate and enhance their workflow, including a project management dashboard and some reports generation. During a meeting, the company's manager proposed developing a report generation program.</p>
+                <p><strong>Task</strong>: My responsibility was to evaluate the feasibility and impact of the proposed task to ensure we prioritized high-value solutions. After a detailed walkthrough, I realized that while the task was technically achievable, it was not very cost-effective from my opinion. It would take a team of 4 from our lab and the company working for months to develop the program, yet in the end, it would only save one person about a week of manual work each year.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Initially addressed my concerns directly with a cost-benefit analysis</li>
+                    <li>When faced with resistance, shifted to asking open-ended questions</li>
+                    <li>Discovered the primary concern was compliance issues, not time savings</li>
+                    <li>Learned that human error in reports could lead to regulatory violations</li>
+                    <li>Proposed a lighter solution that focused on compliance without months of development</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Manager accepted the new streamlined plan</li>
+                    <li>Reduced development time from months to 4 weeks</li>
+                    <li>Successfully met the regulatory compliance requirements</li>
+                    <li>Redirected team efforts toward other high-impact projects</li>
+                    <li>Enhanced collaboration with the company through shared understanding</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: When facing resistance, understanding the "why" behind a decision is just as important as the "what." By staying open-minded and adjusting my approach, I was able to turn a potential conflict into a productive collaboration.</p>
+            </div>
+
+            <div id="greatest-weakness" class="story-section">
+                <h3>Greatest Weakness: Taking on Too Much Without Delegating</h3>
+                <p><strong>Situation</strong>: At HSBC, our team was working on two projects at the same time. One was a critical client-facing feature with a strict deadline, and the other was an internal optimization project that was less urgent but still important. While I had teammates working on the client feature, I was the only engineer responsible for the optimization task, as it required deep technical knowledge and understanding of the project.</p>
+                <p><strong>Task</strong>: My goal was to ensure that both projects were completed on time without compromising quality. I needed to balance my workload effectively and make sure that everything was delivered without delays.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Prioritized the client-facing feature first</li>
+                    <li>Built the initial structure and collaborated with teammates</li>
+                    <li>Worked on the optimization task entirely on my own</li>
+                    <li>Avoided delegating due to specialized technical knowledge</li>
+                    <li>Worked extra hours to keep both projects on track</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Both projects successfully delivered on time</li>
+                    <li>Optimization significantly improved system performance</li>
+                    <li>Process was stressful and inefficient</li>
+                    <li>Realized taking everything on myself wasn't effective</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Delegation is crucial even for specialized tasks; knowledge sharing and collaboration improve efficiency and reduce stress.</p>
+            </div>
+
+            <div id="difficult-client" class="story-section">
+                <h3>Difficult Client: Handling Unclear Expectations</h3>
+                <p><strong>Situation</strong>: While working at HSBC, I developed a web application that allowed clients to query bank transactions. Over time, as the database grew larger, some queries—especially those on non-indexed columns—became slower. One of our clients started repeatedly complaining about latency issues, demanding an immediate fix.</p>
+                <p><strong>Task</strong>: My responsibility was to address the client's concerns while ensuring system efficiency. I had previously sent them instructions on optimizing their queries, but they kept following up, insisting on a different solution without providing clear details on their challenges.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Scheduled a one-on-one call instead of continuing email exchanges</li>
+                    <li>Explained database indexing concepts in simple, non-technical terms</li>
+                    <li>Asked clarifying questions to understand their actual needs</li>
+                    <li>Discovered they were unaware of alternative query strategies</li>
+                    <li>Provided guidance on better filtering methods</li>
+                    <li>Optimized backend queries to improve response times</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Client stopped experiencing major delays</li>
+                    <li>Expressed satisfaction with the solution</li>
+                    <li>Realized the issue was more about communication than technical problems</li>
+                    <li>Improved relationship with the client</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Technical problems often stem from communication gaps; proactively aligning with clients and asking the right questions prevents misunderstandings before they escalate.</p>
+            </div>
+
+            <div id="prioritizing-customers" class="story-section">
+                <h3>Prioritizing Customers: Balancing Impact and Urgency</h3>
+                <p><strong>Situation</strong>: At HSBC, I worked on a bank transaction query system where multiple clients relied on our service daily. Over time, as the number of users grew, we started receiving several customer requests simultaneously, including feature enhancements, bug reports, and performance issues. Given the limited resources, we couldn't address everything at once, so I had to determine how to prioritize competing requests effectively.</p>
+                <p><strong>Task</strong>: My goal was to ensure that high-impact and time-sensitive customer issues were addressed first while balancing long-term improvements. I needed a clear framework to prioritize efficiently without overlooking any requests.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Developed a two-factor prioritization framework based on impact and urgency</li>
+                    <li>Categorized issues into three levels:
+                        <ul>
+                            <li>Critical Issues (Immediate Fixes) for core functionality problems</li>
+                            <li>High-Impact Requests (Planned Fixes) for issues with workarounds</li>
+                            <li>Nice-to-Have Enhancements (Backlog Prioritization) for experience improvements</li>
+                        </ul>
+                    </li>
+                    <li>Communicated clear timelines with customers for transparency</li>
+                    <li>Used impact metrics (affected users, business functions) to make decisions</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Resolved critical issues quickly without missing important work</li>
+                    <li>Customers stayed informed about issue status</li>
+                    <li>Reduced repeated complaints through transparent communication</li>
+                    <li>Efficiently delivered high-value enhancements</li>
+                    <li>Maintained system stability while implementing improvements</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Effective prioritization is about strategic decision-making based on impact and urgency, not just responding to the loudest complaints. A structured approach ensures balanced customer service without compromising long-term improvements.</p>
+            </div>
+
+            <div id="unclear-responsibility" class="story-section">
+                <h3>Unclear Responsibility: Working on a Project with Unclear Responsibilities</h3>
+                <p><strong>Situation</strong>: At HSBC, I was assigned to work on a client contact information dashboard project. While the project had a clear goal, the division of responsibilities between the backend, frontend, and DevOps teams was not well-defined. There was no formal project manager, and tasks were loosely assigned, leading to confusion about who was responsible for what.</p>
+                <p><strong>Task</strong>: My role was to develop the backend services, but because of the ambiguity, I had to ensure that all components—backend, frontend, and deployment—were aligned without stepping on others' work or missing critical tasks.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Took initiative to clarify roles by scheduling a sync meeting with the team</li>
+                    <li>Drafted a shared task list mapping out backend, frontend, and DevOps tasks</li>
+                    <li>Set up regular check-ins with frontend engineers for smooth integration</li>
+                    <li>Stepped in to help containerize the application with Docker</li>
+                    <li>Coordinated with DevOps engineers to finalize production setup</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Avoided bottlenecks and miscommunication</li>
+                    <li>Dashboard was successfully delivered on time</li>
+                    <li>Team had a clearer workflow for future projects</li>
+                    <li>Improved cross-functional collaboration</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: In projects with unclear responsibilities, taking initiative to define roles, ensure alignment, and proactively collaborate across teams is crucial for success. Instead of waiting for instructions, approach ambiguous situations by facilitating structure and communication.</p>
+            </div>
+
+            <div id="incomplete-data-debugging" class="story-section">
+                <h3>Working with Incomplete Data to Debug an Automated Report Generation Program</h3>
+                <p><strong>Situation</strong>: In my lab, I was working on a program to automatically generate Excel reports for compliance. After completing development, we moved to the testing phase, but the team encountered an issue where the program failed to generate the report, and the error was not captured by the logs. Without clear error messages, diagnosing the issue became challenging.</p>
+                <p><strong>Task</strong>: My goal was to identify and fix the issue as quickly as possible, since the report was due in three weeks, and we needed enough time to test and resolve all potential problems before deployment.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Set up a quick meeting with the team to replicate the issue in real time</li>
+                    <li>Suspected that input file format differed from local test files</li>
+                    <li>Gathered and analyzed the team's input files</li>
+                    <li>Discovered unexpected edge cases the program wasn't handling</li>
+                    <li>Summarized issues in the input files and provided a quick fix</li>
+                    <li>Added validation checks to detect incorrect inputs early</li>
+                    <li>Released an updated version with user notifications for incorrect formats</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Identified and fixed the issue within one day</li>
+                    <li>Allowed testing to continue without delays</li>
+                    <li>New validation feature prevented similar failures</li>
+                    <li>Program was successfully deployed on time</li>
+                    <li>Ensured compliance reports could be generated as required</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: When dealing with incomplete data, collaborating with the team and investigating real inputs is crucial. Robust validation and proactive error handling are essential for production systems to make debugging smoother.</p>
+            </div>
+
+            <div id="team-member-failed" class="story-section">
+                <h3>Handling a Team Member Who Didn't Meet Expectations on a Frontend Task</h3>
+                <p><strong>Situation</strong>: While leading a team of five in my professor's lab to develop a full-stack dashboard web application, one of the junior engineers was assigned to develop a frontend feature. However, he was unable to fix a UI issue I had flagged on GitHub, which affected the dialog box's responsiveness on different screen sizes.</p>
+                <p><strong>Task</strong>: My goal was to help the junior engineer understand and resolve the issue, while also ensuring he developed the skills to prevent similar issues in the future.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Scheduled a 1:1 meeting to go over the issue and demonstrate the root cause</li>
+                    <li>Showed how the CSS style worked fine on large screens but broke on smaller screens</li>
+                    <li>Provided a quick fix by introducing CSS grid layout and explaining proper styling</li>
+                    <li>Taught debugging techniques using browser developer tools</li>
+                    <li>Introduced using LLMs to find solutions for frontend problems efficiently</li>
+                    <li>Encouraged him to deepen his understanding of HTML, CSS, and JavaScript</li>
+                    <li>Guided him toward resources for improving frontend development skills</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Engineer successfully fixed the issue and improved his debugging approach</li>
+                    <li>He gained more confidence in handling CSS and layout problems independently</li>
+                    <li>He began using structured debugging techniques for future tasks</li>
+                    <li>Team efficiency improved with fewer UI issues requiring later correction</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Mentoring through hands-on guidance is more effective than simply pointing out problems. Teaching team members how to approach problems systematically results in long-term improvements in their skills and the team's overall productivity.</p>
+            </div>
+
+            <div id="calculated-risk" class="story-section">
+                <h3>Taking a Calculated Risk: Renewing an Expiring Agile Workflow Tool Without Approval</h3>
+                <p><strong>Situation</strong>: At TVCBOOK, I was responsible for managing the Agile workflow using a third-party tool. One day, I received an email notification stating that our subscription would expire the next day, and without renewal, our entire development workflow and project tracking system would be disrupted. However, getting budget approval for renewal would take at least 2–3 days, meaning we would face downtime and productivity loss.</p>
+                <p><strong>Task</strong>: My goal was to keep the Agile workflow running smoothly without causing interruptions, but I had to decide whether to renew the subscription without formal approval or wait for management's approval and risk workflow disruptions.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Assessed the risk, knowing the tool was essential to our workflow</li>
+                    <li>Confirmed the likelihood of reimbursement by reviewing past approvals</li>
+                    <li>Took the initiative to renew the subscription using available team resources</li>
+                    <li>Immediately informed the finance team about the renewal and justified the decision</li>
+                    <li>Requested reimbursement with a clear explanation of the circumstances</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>The workflow remained operational without any downtime</li>
+                    <li>Received some pushback from the finance department initially</li>
+                    <li>Successfully justified the decision and secured reimbursement</li>
+                    <li>Team appreciated the quick action that prevented delays in sprint planning</li>
+                    <li>Preserved team productivity during a critical period</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Calculated risks are sometimes necessary to prevent larger disruptions. By assessing potential consequences, ensuring alignment with company goals, and acting responsibly, I learned to make informed decisions that benefit the team while properly weighing risk versus reward.</p>
+            </div>
+
+                         <div id="communicating-change" class="story-section">
+                <h3>Communicating a Change in Direction: Adjusting Backend Architecture for Maintainability</h3>
+                <p><strong>Situation</strong>: At HSBC, I was working on a client contact information dashboard. Initially, the plan was to reuse an existing backend service built by another team, as our manager believed it would save development time. However, after analyzing the service, I found that it was overly complex for our needs and would be difficult to maintain in the long run. I realized that building a lightweight backend from scratch would be a better solution, but I anticipated resistance from my manager and teammates, who were focused on delivering within tight deadlines.</p>
+                <p><strong>Task</strong>: My goal was to convince my manager and team that developing a simplified backend was the better long-term approach, while also addressing concerns about project timelines and workload.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Prepared a clear comparison documenting the differences between reusing the existing system vs. building a new one</li>
+                    <li>Highlighted the maintenance challenges, unnecessary complexity, and long-term risks of using the existing service</li>
+                    <li>Addressed concerns proactively, acknowledging the team's focus on deadlines</li>
+                    <li>Demonstrated how building a lightweight backend would still meet the schedule while ensuring future scalability</li>
+                    <li>Framed the discussion around business impact, emphasizing reduced future maintenance costs</li>
+                    <li>Proposed a compromise to balance efficiency and time constraints by reusing some components while refactoring others</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>Manager agreed to the new approach after seeing the clear benefits in maintainability and scalability</li>
+                    <li>Despite spending slightly more time on initial development, saved effort in future development and debugging</li>
+                    <li>Final system was more stable, easier to maintain, and better aligned with project needs</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Communicating change effectively requires addressing concerns head-on. By presenting a data-driven comparison, focusing on business impact, and offering a balanced solution, it's possible to gain buy-in for a better long-term approach while maintaining trust and alignment within the team.</p>
+            </div>
+            
+            <div id="delivering-harsh-truth" class="story-section">
+                <h3>Delivering a Harsh Truth: Addressing a Junior Engineer's Incomplete Work</h3>
+                <p><strong>Situation</strong>: While leading a team of five in my professor's lab, we were developing a dashboard web application for a company. One of the junior engineers was struggling with his frontend tasks, repeatedly submitting incomplete and buggy implementations. Despite multiple reviews and feedback, the same issues kept occurring, and it became clear that his lack of understanding was slowing down the entire project.</p>
+                <p><strong>Task</strong>: I needed to have a direct conversation with him to address the issue honestly, ensure that he understood the expectations, and help him improve without demotivating him.</p>
+                <p><strong>Action</strong>:</p>
+                <ul>
+                    <li>Scheduled a private 1:1 meeting to create a safe space for open discussion</li>
+                    <li>Provided clear, objective feedback about specific mistakes and their impact on the team</li>
+                    <li>Acknowledged his efforts but emphasized expectations: "I see that you're trying, but the quality isn't at the level we need"</li>
+                    <li>Offered guidance through a structured learning approach:
+                        <ul>
+                            <li>Smaller, focused tasks for step-by-step learning</li>
+                            <li>Pair programming with a more experienced teammate</li>
+                            <li>Recommended frontend learning resources for his weak areas</li>
+                        </ul>
+                    </li>
+                    <li>Set clear expectations for ownership of learning and testing code before submission</li>
+                </ul>
+                <p><strong>Result</strong>:</p>
+                <ul>
+                    <li>He acknowledged the issue and became more receptive to feedback</li>
+                    <li>Over time, his frontend skills improved with fewer buggy implementations</li>
+                    <li>The project stayed on track with his more effective contributions</li>
+                    <li>Team dynamic strengthened through a culture of open but constructive feedback</li>
+                </ul>
+                <p class="key-learning"><strong>Key Learning</strong>: Delivering harsh truths is necessary for growth, but should be done with respect, empathy, and a solution-oriented mindset. Balancing honest feedback with clear support helps struggling teammates improve while keeping projects on schedule.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to Table Button -->
+    <button id="backToTable" title="Back to Table">
+        <i class="arrow-up">↑</i>
+    </button>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Back to Table button functionality
+        $(document).ready(function() {
+            // Show/hide button based on scroll position
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > $("#storyTable").offset().top + $("#storyTable").height()) {
+                    $('#backToTable').fadeIn();
+                } else {
+                    $('#backToTable').fadeOut();
+                }
+            });
+            
+            // Smooth scroll to table when button is clicked
+            $('#backToTable').click(function() {
+                $('html, body').animate({
+                    scrollTop: $("#storyTable").offset().top - 20
+                }, 0);
+                return false;
+            });
+        });
+    </script>
+</body>
+</html> 
