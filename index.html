@@ -35,6 +35,24 @@
             transform: translateY(-3px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
+        
+        /* Alternating colors for story sections */
+        .story-section {
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .story-section:nth-child(odd) {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+        }
+        
+        .story-section:nth-child(even) {
+            background-color: #e9f7ef;
+            border-left: 4px solid #28a745;
+        }
     </style>
 </head>
 <body>
@@ -46,7 +64,7 @@
         <!-- Self-Introduction Section -->
         <div class="introduction-section mb-4 p-4 bg-light border rounded">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6 story-section">
                     <h2 class="mb-3">About Me</h2>
                     <p>Hi, my name is <strong>Guohui Lin</strong>, but I know it can be a bit tricky to pronounce, so feel free to call me by my preferred name, <strong>Panos</strong>.</p>
                     
@@ -67,13 +85,25 @@
                     
                     <p class="mt-4 lead">I'm excited to be here today and appreciate the opportunity to interview with you. Looking forward to our conversation!</p>
                 </div>
+                <!-- Why I Want to Join Amazon Section -->
+                <div class="col-lg-6 story-section">
+                    <h2 class="mb-3">Why I Want to Join Amazon</h2>
+                    
+                    <h4 class="mt-4">Seeking a Greater Challenge</h4>
+                    <p>I've had the opportunity to work at both a fast-paced startup and a top fintech company (HSBC). The startup experience taught me how to build products from the ground up with limited resources, while HSBC exposed me to large-scale systems in a structured corporate environment. Now, I believe I'm ready for an even greater challenge—one where I can contribute to applications that serve millions of users worldwide. Amazon provides the perfect opportunity to build impactful products at scale and create a positive influence on society through technology.</p>
+                    
+                    <h4 class="mt-4">Inspired by the People at Amazon</h4>
+                    <p>I also have extraordinary friends working at Amazon. They are highly capable yet humble (Yan youfu), always pushing themselves to improve while fostering a collaborative environment. Their experiences have shown me that Amazon values excellence, innovation, and teamwork, and I would love the opportunity to work alongside talented engineers like them—learning from the best while also contributing my own expertise.</p>
+                    
+                    <p class="mt-4 lead">That's why I'm excited about joining Amazon—to take on new challenges, collaborate with brilliant minds, and contribute to a platform that shapes the digital world.</p>
+                </div>
             </div>
         </div>
 
         <!-- Five-Year Plan Section -->
         <div class="career-plan-section mb-4 p-4 bg-light border rounded">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 story-section">
                     <h2 class="mb-3">Five-Year Plan: Becoming a Tech Lead</h2>
                     
                     <h4 class="mt-4">Short-Term Goals (1-2 Years)</h4>
@@ -1289,7 +1319,7 @@
     </div>
     
     <!-- Back to Table Button -->
-    <button id="backToTable" title="Back to Table">
+    <button id="backToTable" title="Back to Table" style="display: flex; align-items: center; justify-content: center;">
         <i class="arrow-up">↑</i>
     </button>
 
