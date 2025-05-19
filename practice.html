@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Behavioral Interview Practice</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .question-card {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+        }
+        
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .principle-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 5px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .stories-container {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f0f8ff;
+            border: 1px solid #007bff;
+        }
+        
+        .story-link {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s;
+        }
+        
+        .story-link:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+        
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+        
+        .principle-1 { background-color: #00bcd4; } /* Deliver Results */
+        .principle-2 { background-color: #4caf50; } /* Invent and Simplify */
+        .principle-3 { background-color: #ff9800; } /* Customer Obsession */
+        .principle-4 { background-color: #146eb4; } /* Ownership */
+        .principle-5 { background-color: #607d8b; } /* Dive Deep */
+        .principle-6 { background-color: #e74c3c; } /* Learn and Be Curious */
+        .principle-7 { background-color: #f44336; } /* Have Backbone */
+        .principle-8 { background-color: #3f51b5; } /* Earn Trust */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="text-center py-3">
+            <h1>Amazon Leadership Principles - Practice Questions</h1>
+            <p class="lead">Practice answering behavioral questions for the top 8 leadership principles</p>
+            <a href="index.html" class="btn btn-outline-secondary mb-3">← Back to Story Lookup</a>
+        </header>
+        
+        <div class="question-card">
+            <div class="question-content">
+                <div class="principle-tag mb-3">
+                    <span id="current-principle" class="principle-badge">Leadership Principle</span>
+                </div>
+                <p id="question-text" class="question-text">Click "Next Question" to start practicing</p>
+                
+                <div class="stories-container" id="stories-container">
+                    <h5>Possible stories that could answer this question:</h5>
+                    <div id="story-suggestions"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="control-buttons">
+            <button id="next-btn" class="btn btn-primary">Next Question</button>
+            <button id="show-stories-btn" class="btn btn-success">Show Relevant Stories</button>
+            <div class="form-check ml-3 pt-2">
+                <input class="form-check-input" type="checkbox" id="filter-principle">
+                <label class="form-check-label" for="filter-principle">
+                    Focus on specific principles
+                </label>
+            </div>
+        </div>
+        
+        <div id="principles-filter" style="display: none; text-align: center; margin: 20px 0;">
+            <div class="btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-outline-primary active">
+                    <input type="checkbox" checked value="1"> Deliver Results
+                </label>
+                <label class="btn btn-outline-success active">
+                    <input type="checkbox" checked value="2"> Invent and Simplify
+                </label>
+                <label class="btn btn-outline-warning active">
+                    <input type="checkbox" checked value="3"> Customer Obsession
+                </label>
+                <label class="btn btn-outline-info active">
+                    <input type="checkbox" checked value="4"> Ownership
+                </label>
+                <label class="btn btn-outline-secondary active">
+                    <input type="checkbox" checked value="5"> Dive Deep
+                </label>
+                <label class="btn btn-outline-danger active">
+                    <input type="checkbox" checked value="6"> Learn and Be Curious
+                </label>
+                <label class="btn btn-outline-dark active">
+                    <input type="checkbox" checked value="7"> Have Backbone
+                </label>
+                <label class="btn btn-outline-primary active">
+                    <input type="checkbox" checked value="8"> Earn Trust
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="practice.js"></script>
+</body>
+</html> 
