@@ -180,16 +180,261 @@ const storySuggestions = document.getElementById('story-suggestions');
 const filterCheckbox = document.getElementById('filter-principle');
 const principlesFilter = document.getElementById('principles-filter');
 
-// Shuffle array function
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+// Define story keywords to help match questions with stories
+const storyKeywords = {
+    "transcoding-system": ["built something innovative", "technical challenge", "improved a system", "delivered results", "scaling solution"],
+    "mpi-debugging": ["complex problem", "dive deep into code", "solved a difficult technical issue", "used data to solve a problem"],
+    "incomplete-data-debugging": ["worked with incomplete information", "debugging with limited data", "delivered under time pressure", "found a root cause"],
+    "report-generation-fix": ["worked under tight deadlines", "urgent situation", "prioritize work", "delivering for a customer in a crisis"],
+    "logging-fix-at-hsbc": ["simplified a complex problem", "elegant solution", "improved efficiency", "reducing costs"],
+    "simple-log-solution": ["invented a simpler solution", "challenge complexity", "demonstrated frugality", "improved efficiency"],
+    "mentoring-web-dev": ["developing others", "mentor team members", "developing talent", "grow someone's skills"],
+    "team-member-failed": ["someone failed under your leadership", "help underperforming team members", "coaching through a difficult task", "helped someone overcome technical challenges"],
+    "delivering-harsh-truth": ["gave difficult feedback", "handle performance issues", "brutally honest", "tough necessary feedback"],
+    "greatest-weakness": ["failed", "greatest weakness", "took on too much", "learn from a mistake", "delegate work"],
+    "unclear-responsibility": ["took ownership", "led without authority", "navigating ambiguity", "handle unclear responsibilities"],
+    "critical-feedback": ["receiving critical feedback", "handle criticism", "had to change your approach", "learned from negative feedback"],
+    "apologizing-to-someone": ["made a mistake", "had to apologize", "handle realizing you were wrong", "admitting a mistake"],
+    "devops-integration": ["managing team conflict", "improved a process", "fostered inclusion", "stood up for someone else"],
+    "calculated-risk": ["calculated risk", "decision without approval", "acted without authorization", "weigh risk"],
+    "difficult-client": ["handling a difficult customer", "resolving a customer misunderstanding", "explain technical concepts", "gone above and beyond for a customer"],
+    "prioritizing-customers": ["prioritizing customer needs", "competing customer demands", "balancing urgent vs important work", "created a process to improve customer service"],
+    "questioning-report-requirements": ["challenging requirements", "pushed back on a request", "handle inefficient processes", "found a better solution"],
+    "sso-security-conflict": ["disagreeing with leadership", "standing up for what's right", "challenged a senior colleague", "handle technical disagreements"],
+    "unresponsive-api-team": ["working with difficult colleagues", "get information from uncooperative teams", "navigating organizational silos", "shown persistence"],
+    "communicating-change": ["convincing others of your ideas", "build consensus for major changes", "advocated for a better approach", "influenced technical decisions with data"],
+    "linkedin-job-turbo": ["project you initiated from scratch", "learning new technologies", "approach innovation", "built something to solve a personal problem"],
+    "dashboard-ui-enhancement": ["staying current with industry trends", "evaluate technical options", "implementing UX improvements", "researched external solutions"],
+    "career-switch": ["major career change", "learning something completely new", "approach significant challenges", "persevered through difficulty"]
+};
+
+// Function to find stories matching a specific question, with match details
+function findStoriesForQuestion(question, principle) {
+    const matchingStories = [];
+    const principleStories = storyMapping[principle];
+    
+    // Normalize the question text for better matching
+    const normalizedQuestion = question.toLowerCase();
+    
+    // Check each story relevant to this principle
+    principleStories.forEach(storyKey => {
+        // Get keywords for this story
+        const keywords = storyKeywords[storyKey];
+        
+        // If we have keywords for this story, check for matches
+        if (keywords) {
+            // Find all matching keywords
+            const matchingKeywords = keywords.filter(keyword => 
+                normalizedQuestion.includes(keyword.toLowerCase())
+            );
+            
+            // If we found matches, add this story to our results with match info
+            if (matchingKeywords.length > 0) {
+                matchingStories.push({
+                    storyKey: storyKey,
+                    matchingKeywords: matchingKeywords
+                });
+            }
+        }
+    });
+    
+    // If no specific matches found, return all stories for the principle
+    // but without specific keyword matches
+    if (matchingStories.length > 0) {
+        return matchingStories;
+    } else {
+        return principleStories.map(storyKey => ({
+            storyKey: storyKey,
+            matchingKeywords: []
+        }));
     }
-    return array;
 }
 
-// Pick a random question
+// Define direct mappings from questions to relevant stories
+const questionToStoryMapping = {
+    // 1. Deliver Results
+    "Tell me about a time you had to deliver results under tight constraints or deadlines.": ["report-generation-fix", "transcoding-system", "incomplete-data-debugging"],
+    "Describe a project where you had to overcome significant obstacles to achieve your goal.": ["transcoding-system", "mpi-debugging", "career-switch"],
+    "Share an example of when you had to make a difficult decision to complete a task.": ["calculated-risk", "communicating-change"],
+    "Tell me about a time you prioritized tasks to achieve a goal on time.": ["report-generation-fix", "prioritizing-customers"],
+    "Give an example of a project that didn't go as planned and how you still delivered.": ["incomplete-data-debugging", "greatest-weakness"],
+    "When have you gone above and beyond to achieve results?": ["mentoring-web-dev", "career-switch", "transcoding-system"],
+    "Tell me about a time when you were able to deliver a difficult project on time.": ["transcoding-system", "report-generation-fix"],
+    "Describe how you've monitored progress on your projects to ensure timely completion.": ["unclear-responsibility"],
+    "Tell me about a time when you had to adjust your work to deliver results on time.": ["report-generation-fix", "incomplete-data-debugging"],
+    "Give an example of how you've worked backwards from a deadline to plan a complex project.": ["transcoding-system", "unclear-responsibility"],
+    
+    // 2. Invent and Simplify
+    "Describe a time when you found a simple solution to a complex problem.": ["logging-fix-at-hsbc", "simple-log-solution"],
+    "Tell me about something you invented that simplified a process.": ["simple-log-solution", "transcoding-system"],
+    "When have you eliminated complexity to make something more user-friendly?": ["simple-log-solution", "logging-fix-at-hsbc"],
+    "Share an example of how you challenged conventional thinking to create a better solution.": ["communicating-change", "questioning-report-requirements"],
+    "Tell me about a time you implemented a new approach that improved efficiency.": ["logging-fix-at-hsbc", "transcoding-system"],
+    "Describe how you identified and eliminated an unnecessary process or step.": ["simple-log-solution", "logging-fix-at-hsbc"],
+    "When have you used technology to simplify a manual process?": ["transcoding-system", "incomplete-data-debugging"],
+    "Tell me about a time you challenged yourself to find the easiest way to solve a problem.": ["simple-log-solution", "logging-fix-at-hsbc"],
+    "How have you made a complicated system or process easier to understand?": ["logging-fix-at-hsbc", "simple-log-solution"],
+    "Give an example of when you improved something by making it more streamlined.": ["logging-fix-at-hsbc", "simple-log-solution", "transcoding-system"],
+    
+    // 3. Customer Obsession
+    "Tell me about a time when you went above and beyond for a customer.": ["difficult-client", "report-generation-fix"],
+    "Describe how you've incorporated customer feedback into your work or product.": ["difficult-client", "prioritizing-customers"],
+    "When have you made a decision that benefited customers at the expense of short-term business goals?": ["questioning-report-requirements", "prioritizing-customers"],
+    "Give an example of how you identified and addressed a customer need that wasn't obvious.": ["difficult-client", "prioritizing-customers"],
+    "Tell me about a time you had to balance competing customer priorities.": ["prioritizing-customers"],
+    "Share an experience where you advocated for a customer when others didn't.": ["questioning-report-requirements", "sso-security-conflict"],
+    "Describe a time when you had to deal with an unsatisfied customer and how you turned it around.": ["difficult-client", "report-generation-fix"],
+    "How have you measured customer satisfaction in previous roles?": ["prioritizing-customers"],
+    "Tell me about a time when you anticipated a customer's needs before they expressed them.": ["prioritizing-customers", "difficult-client"],
+    "When have you used customer insights to drive a significant improvement or innovation?": ["questioning-report-requirements", "prioritizing-customers"],
+    
+    // 4. Ownership
+    "Tell me about a time when you took ownership of a problem that wasn't yours to solve.": ["unclear-responsibility", "calculated-risk", "sso-security-conflict"],
+    "Describe a situation where you identified a problem and took action without being asked.": ["logging-fix-at-hsbc", "unclear-responsibility", "sso-security-conflict"],
+    "When have you gone beyond your job responsibilities to get something done?": ["unclear-responsibility", "calculated-risk", "mentoring-web-dev"],
+    "Share an example of when you owned a mistake and what you did about it.": ["apologizing-to-someone", "critical-feedback", "greatest-weakness"],
+    "Tell me about a time you saw a long-term problem and took steps to prevent it.": ["communicating-change", "sso-security-conflict"],
+    "Give an example of when you acted in the company's best interest without being asked.": ["calculated-risk", "sso-security-conflict"],
+    "Describe a time when you took responsibility for a failed project or initiative.": ["greatest-weakness", "delivering-harsh-truth"],
+    "When have you demonstrated a sense of urgency to resolve an issue that others didn't see as important?": ["report-generation-fix", "sso-security-conflict", "calculated-risk"],
+    "Tell me about a time when you had to make a difficult decision without having all the information.": ["calculated-risk", "incomplete-data-debugging"],
+    "Share an experience where you had to pursue proper channels to get your problem fixed.": ["unresponsive-api-team", "prioritizing-customers"],
+    
+    // 5. Dive Deep
+    "Tell me about a time you found a root cause by digging into data or details.": ["mpi-debugging", "incomplete-data-debugging", "difficult-client"],
+    "Describe a situation where your deep understanding of a system helped solve a problem.": ["transcoding-system", "mpi-debugging", "communicating-change"],
+    "When have you uncovered an issue that others had missed by investigating thoroughly?": ["mpi-debugging", "incomplete-data-debugging"],
+    "Share an example where your attention to detail had a significant impact.": ["mpi-debugging", "incomplete-data-debugging", "sso-security-conflict"],
+    "Tell me about a time when you were skeptical about a metric or claim and investigated it.": ["sso-security-conflict", "questioning-report-requirements"],
+    "Give an example of when you needed to gather detailed information to make a decision.": ["communicating-change", "dashboard-ui-enhancement"],
+    "Describe how you validated assumptions on a project through thorough investigation.": ["mpi-debugging", "sso-security-conflict"],
+    "When have you identified a pattern or trend that others didn't notice?": ["logging-fix-at-hsbc", "incomplete-data-debugging"],
+    "Tell me about a time you had to become an expert on something quickly to solve a problem.": ["mpi-debugging", "transcoding-system"],
+    "Share an example where asking detailed questions led to a breakthrough.": ["difficult-client", "questioning-report-requirements"],
+    
+    // 6. Learn and Be Curious
+    "Tell me about a time you learned a new skill to complete a task or project.": ["career-switch", "linkedin-job-turbo", "team-member-failed"],
+    "Describe how you've stayed current in your field and applied that knowledge.": ["dashboard-ui-enhancement", "career-switch"],
+    "When have you sought to understand a different perspective to improve your work?": ["critical-feedback", "difficult-client"],
+    "Share an example of a time you explored a new approach or technology.": ["linkedin-job-turbo", "dashboard-ui-enhancement"],
+    "Tell me about a time you ventured outside your comfort zone to learn something new.": ["career-switch", "linkedin-job-turbo"],
+    "Give an example of how your curiosity led to innovation or improvement.": ["dashboard-ui-enhancement", "linkedin-job-turbo"],
+    "Describe how you've encouraged others to learn and be curious.": ["mentoring-web-dev", "team-member-failed"],
+    "When have you challenged an existing process because you were curious about a better way?": ["critical-feedback", "unclear-responsibility"],
+    "Tell me about a time you turned a failure into a learning opportunity.": ["greatest-weakness", "critical-feedback", "team-member-failed"],
+    "Share a situation where your curiosity about a customer or business need led to a new solution.": ["difficult-client", "dashboard-ui-enhancement"],
+    
+    // 7. Have Backbone; Disagree and Commit
+    "Tell me about a time when you disagreed with your manager or team's approach.": ["communicating-change", "sso-security-conflict"],
+    "Describe a situation where you had to stand up for what you believed was right.": ["sso-security-conflict", "devops-integration"],
+    "When have you committed to a team decision despite initially disagreeing with it?": ["communicating-change", "unclear-responsibility"],
+    "Share an example of when you challenged the status quo because you believed there was a better way.": ["communicating-change", "questioning-report-requirements", "sso-security-conflict"],
+    "Tell me about a time you had to deliver difficult feedback to someone.": ["delivering-harsh-truth", "devops-integration"],
+    "Give an example of how you've respectfully challenged a decision from leadership.": ["sso-security-conflict", "questioning-report-requirements", "communicating-change"],
+    "Describe a time when you had to balance being firm and being respectful.": ["sso-security-conflict", "delivering-harsh-truth", "devops-integration"],
+    "When have you taken an unpopular stance on something you believed in?": ["sso-security-conflict", "questioning-report-requirements"],
+    "Tell me about a time you navigated a politically sensitive situation while staying true to your principles.": ["sso-security-conflict", "questioning-report-requirements"],
+    "Share an example of when you had to persuade others about an important issue.": ["communicating-change", "sso-security-conflict", "questioning-report-requirements"],
+    
+    // 8. Earn Trust
+    "Tell me about a time when you gained the trust of a skeptical stakeholder or colleague.": ["unresponsive-api-team", "difficult-client", "communicating-change"],
+    "Describe how you've built rapport with a new team or customer.": ["mentoring-web-dev", "unclear-responsibility", "difficult-client"],
+    "When have you had to admit a mistake to maintain trust with others?": ["apologizing-to-someone", "greatest-weakness"],
+    "Share an example of how you established credibility in a new role or environment.": ["mentoring-web-dev", "career-switch", "unclear-responsibility"],
+    "Tell me about a time you had to give candid feedback to build long-term trust.": ["delivering-harsh-truth", "devops-integration"],
+    "Give an example of when you maintained confidentiality despite pressure to share information.": ["prioritizing-customers", "difficult-client"],
+    "Describe a situation where you had to rebuild damaged trust.": ["apologizing-to-someone", "devops-integration"],
+    "When have you made a difficult decision that maintained your integrity?": ["sso-security-conflict", "calculated-risk", "questioning-report-requirements"],
+    "Tell me about a time you helped a team member even though there was no immediate benefit to you.": ["team-member-failed", "mentoring-web-dev"],
+    "Share an experience where transparency was important to building trust.": ["delivering-harsh-truth", "apologizing-to-someone", "prioritizing-customers"]
+};
+
+// New function to find stories matching a specific question
+function findStoriesForQuestion(question, principle) {
+    // Check if we have direct mappings for this question
+    if (questionToStoryMapping[question]) {
+        // Return stories with the mapping information
+        return questionToStoryMapping[question].map(storyKey => ({
+            storyKey: storyKey,
+            isDirectMatch: true
+        }));
+    }
+    
+    // If no direct mapping found, fall back to all stories for this principle
+    return storyMapping[principle].map(storyKey => ({
+        storyKey: storyKey,
+        isDirectMatch: false
+    }));
+}
+
+// Show relevant stories
+function showRelevantStories() {
+    // Clear previous suggestions
+    storySuggestions.innerHTML = '';
+    
+    // Find stories specifically matching the current question
+    const questionMatchingStories = findStoriesForQuestion(currentQuestion, currentPrinciple);
+    
+    // Flag to track if we're showing question-specific matches
+    let showingSpecificMatches = false;
+    
+    if (questionMatchingStories && questionMatchingStories.length > 0) {
+        // Check if we have any direct matches
+        const hasDirectMatches = questionMatchingStories.some(match => match.isDirectMatch);
+        showingSpecificMatches = hasDirectMatches;
+        
+        // Create links for each matching story
+        questionMatchingStories.forEach(match => {
+            const storyKey = match.storyKey;
+            const storyTitle = storyTitles[storyKey];
+            
+            if (storyTitle) {
+                // Create container for story link
+                const storyContainer = document.createElement('div');
+                storyContainer.className = 'mb-3';
+                
+                // Create story link
+                const storyLink = document.createElement('a');
+                storyLink.href = `index.html#${storyKey}`;
+                storyLink.className = 'story-link';
+                storyLink.textContent = storyTitle;
+                storyLink.target = '_blank'; // Open in new tab
+                
+                // Add a visual indicator if this is a directly mapped story
+                if (match.isDirectMatch) {
+                    storyLink.style.borderLeft = '4px solid #28a745';
+                    
+                    // Add a "Best Match" indicator
+                    const matchInfo = document.createElement('div');
+                    matchInfo.className = 'mt-1 ml-3';
+                    matchInfo.style.fontSize = '0.85rem';
+                    matchInfo.innerHTML = '<strong class="text-success">✓ Best match for this question</strong>';
+                    storyContainer.appendChild(storyLink);
+                    storyContainer.appendChild(matchInfo);
+                } else {
+                    storyContainer.appendChild(storyLink);
+                }
+                
+                storySuggestions.appendChild(storyContainer);
+            }
+        });
+        
+        // Add an explanatory note if showing specific matches
+        if (showingSpecificMatches) {
+            const note = document.createElement('p');
+            note.className = 'text-muted mt-3';
+            note.innerHTML = '<small>Stories with green borders are specifically mapped to this question.</small>';
+            storySuggestions.appendChild(note);
+        }
+    } else {
+        storySuggestions.innerHTML = '<p>No specific stories mapped to this question or principle.</p>';
+    }
+    
+    // Show the stories container
+    storiesContainer.style.display = 'block';
+}
+
+// Update the getRandomQuestion function to check for direct matches
 function getRandomQuestion() {
     // Get a random principle from enabled ones
     const randomPrincipleIndex = Math.floor(Math.random() * enabledPrinciples.length);
@@ -205,37 +450,32 @@ function getRandomQuestion() {
     currentPrincipleEl.textContent = principleTitles[currentPrinciple];
     currentPrincipleEl.className = 'principle-badge principle-' + currentPrinciple;
     
-    // Hide stories when showing a new question
-    storiesContainer.style.display = 'none';
-}
-
-// Show relevant stories
-function showRelevantStories() {
-    // Clear previous suggestions
-    storySuggestions.innerHTML = '';
+    // Check if this question has direct story matches
+    const hasDirectMatches = questionToStoryMapping[currentQuestion] !== undefined;
     
-    // Get stories for the current principle
-    const relevantStoryKeys = storyMapping[currentPrinciple];
-    
-    if (relevantStoryKeys && relevantStoryKeys.length > 0) {
-        // Create links for each story
-        relevantStoryKeys.forEach(storyKey => {
-            const storyTitle = storyTitles[storyKey];
-            if (storyTitle) {
-                const storyLink = document.createElement('a');
-                storyLink.href = `index.html#${storyKey}`;
-                storyLink.className = 'story-link';
-                storyLink.textContent = storyTitle;
-                storyLink.target = '_blank'; // Open in new tab
-                storySuggestions.appendChild(storyLink);
-            }
-        });
+    // Add a visual indicator if specific stories match this question
+    if (hasDirectMatches) {
+        // Add a small badge to indicate relevant stories are available
+        const badge = document.createElement('span');
+        badge.className = 'badge badge-success ml-2';
+        badge.textContent = 'Has matching stories';
+        badge.style.fontSize = '0.7rem';
+        badge.style.verticalAlign = 'middle';
+        
+        // Clear any existing badges
+        const existingBadges = document.querySelectorAll('.question-content .badge');
+        existingBadges.forEach(badge => badge.remove());
+        
+        // Add the badge after the question text
+        questionText.appendChild(badge);
     } else {
-        storySuggestions.innerHTML = '<p>No specific stories mapped to this principle.</p>';
+        // Remove any existing badges
+        const existingBadges = document.querySelectorAll('.question-content .badge');
+        existingBadges.forEach(badge => badge.remove());
     }
     
-    // Show the stories container
-    storiesContainer.style.display = 'block';
+    // Hide stories when showing a new question
+    storiesContainer.style.display = 'none';
 }
 
 // Initialize with first question
